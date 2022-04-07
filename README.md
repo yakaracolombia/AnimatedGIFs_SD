@@ -30,3 +30,12 @@ ademas de incluir una version portable de arduino con el FS para poder usar el P
 
 he incluido la libreria modificada de eTFT compatible con multiples drivers que se usaran en futuros videos
 
+se recomiendo usar https://ezgif.com para convertir videos o comprimir otros gif
+
+recordemos que la potencia no es tan alta asi que con gif muy grandes o que superes los 240 pixeles se puede experimentar ralentizaciones o bug de imagenes asi que sientanse en la libertar total de probar todas las optimizaciones y configuraciones de la pagina https://ezgif.com
+
+en teoria podemos usar 2mb de almacenamiento en el ESP8266 pero yo personalmente consigo error al momento de que la carpeta data pese mas de 1.7mb asi que recomiendo no superar ese tamaño
+
+se puede rotar la imagen buscanlo la linea  tft.setRotation(1); y cambiando el (1) por 2, 3, 4, 5 etc
+
+he dejado dos variables a definir segun el tipo de pantalla en caso de color RGB invertido
