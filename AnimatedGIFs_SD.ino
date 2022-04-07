@@ -2,14 +2,17 @@
 
 #define USE_TFT_LIB 0xE8266
 
+//#define TFT_RGB_ORDER TFT_BGR  //PANTALLA BORDE ROJO
+#define TFT_RGB_ORDER TFT_RGB // PANTALLA BORDE AZUL
+
 #ifndef min
 #define min(a, b) (((a) <= (b)) ? (a) : (b))
 #endif
 #include "GifDecoder.h"
 #include "FilenameFunctions.h"    //defines USE_SPIFFS
 
-#define DISPLAY_TIME_SECONDS 100  //
-#define NUMBER_FULL_CYCLES     3  //
+#define DISPLAY_TIME_SECONDS 10  //
+#define NUMBER_FULL_CYCLES     1  //
 #define GIFWIDTH             480  //228 fails on COW_PAINT.  Edit class_implementation.cpp
 #define FLASH_SIZE      512*1024  //     
 
@@ -24,7 +27,7 @@ GifDecoder<GIFWIDTH, 320, 12> decoder;
 
 #if defined(USE_SPIFFS)
 #define GIF_DIRECTORY "/"     //ESP8266 SPIFFS
-#define DISKCOLOUR   CYAN
+#define DISKCOLOUR   WHITE
 #else
 #define GIF_DIRECTORY "/gifs"
 //#define GIF_DIRECTORY "/gifs32"
@@ -52,10 +55,7 @@ long lineTime;  //.kbv
 int32_t parse_start; //.kbv
 
 #include "gifs_128.h"
-#include "wrong_gif.h"
-#include "llama_gif.h"
-#include "mad_man_gif.h"
-#include "mad_race_gif.h"
+
 
 
 #define M0(x) {x, #x, sizeof(x)}
@@ -79,8 +79,6 @@ gif_detail_t gifs[] = {
 #elif FLASH_SIZE >= 512 * 1024     // Due, F446, ESP8266
     M0(teakettle_128x128x10_gif),  // 21155
     M0(bottom_128x128x17_gif),     // 51775
-    M0(globe_rotating_gif),        // 90533
-    M0(mad_race_gif),              //173301
     //    M0(marilyn_240x240_gif),       // 40843
     M0(horse_128x96x8_gif),        //  7868
 #elif FLASH_SIZE >= 256 * 1024     //Teensy3.2, Zero
@@ -225,8 +223,8 @@ void setup() {
 void loop() {
     static unsigned long futureTime, cycle_start, nextFrameTime, frame_time, frames;
 
-    //    int index = random(num_files);
-    static int index = -1;
+        int index = random(num_files);
+//    static int index = -1;
 
     int32_t now = millis();
     if (now >= futureTime || decoder.getCycleNo() > NUMBER_FULL_CYCLES) {

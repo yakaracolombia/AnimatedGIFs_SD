@@ -19,10 +19,10 @@
 #define TFT_RST 12
 #define SD_CS 17
 #elif defined(ESP8266)
-#define TFT_CS  D10
-#define TFT_DC  D9
-#define TFT_RST D8
-#define SD_CS   D4
+#define TFT_CS  D8
+#define TFT_DC  D3
+#define TFT_RST D4
+#define SD_CS   D1
 #else
 #define TFT_CS  10
 #define TFT_DC  9
