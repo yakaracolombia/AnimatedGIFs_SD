@@ -1,3 +1,5 @@
+fork yakarizado de https://github.com/prenticedavid/AnimatedGIFs_SD
+
 # AnimatedGIFs_SD
 Display GIFs on TFT screens from Flash, SD or SPIFFS 
 
@@ -19,3 +21,12 @@ They should minimise the display rectangle to only cover animation changes.
 They should make a compromisde between contiguous run of pixels or multiple transparent pixels.
 
 Many thanks to Craig A. Lindley and Louis Beaudoin (Pixelmatix) for their original work on small LED matrix.
+
+he modificado los pines de conexion de pantalla para hacerla compatible con mis otros proyectos
+
+![WEMOS FULL 1](https://user-images.githubusercontent.com/22075544/162288708-423066c5-3a7a-49df-9e68-abba32e27a41.jpg)
+
+ademas de incluir una version portable de arduino con el FS para poder usar el PROGMEM como almacenamiento adicional
+
+he incluido la libreria modificada de eTFT compatible con multiples drivers que se usaran en futuros videos
+
