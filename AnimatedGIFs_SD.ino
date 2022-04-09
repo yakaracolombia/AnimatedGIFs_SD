@@ -1,10 +1,6 @@
 // please read credits at the bottom of file
 
 #define USE_TFT_LIB 0xE8266
-
-//#define TFT_RGB_ORDER TFT_BGR  //PANTALLA BORDE ROJO
-#define TFT_RGB_ORDER TFT_RGB // PANTALLA BORDE AZUL
-
 #ifndef min
 #define min(a, b) (((a) <= (b)) ? (a) : (b))
 #endif
@@ -54,7 +50,7 @@ long skipCount; //.kbv
 long lineTime;  //.kbv
 int32_t parse_start; //.kbv
 
-#include "gifs_128.h"
+#include "mad_race_gif.h"
 
 
 
@@ -77,10 +73,9 @@ gif_detail_t gifs[] = {
     //    M0(marilyn_240x240_gif),       // 40843
     //    M0(cliff_100x100_gif),   //406564
 #elif FLASH_SIZE >= 512 * 1024     // Due, F446, ESP8266
-    M0(teakettle_128x128x10_gif),  // 21155
-    M0(bottom_128x128x17_gif),     // 51775
+     M0(mad_race_gif),              //173301
     //    M0(marilyn_240x240_gif),       // 40843
-    M0(horse_128x96x8_gif),        //  7868
+//    M0(horse_128x96x8_gif),        //  7868
 #elif FLASH_SIZE >= 256 * 1024     //Teensy3.2, Zero
     M0(teakettle_128x128x10_gif),  // 21155
     M0(bottom_128x128x17_gif),     // 51775
@@ -223,8 +218,8 @@ void setup() {
 void loop() {
     static unsigned long futureTime, cycle_start, nextFrameTime, frame_time, frames;
 
-        int index = random(num_files);
-//    static int index = -1;
+ //       int index = random(num_files);
+   static int index = -1;
 
     int32_t now = millis();
     if (now >= futureTime || decoder.getCycleNo() > NUMBER_FULL_CYCLES) {
@@ -267,7 +262,7 @@ void loop() {
         if (g_gif) good = (openGifFilenameByIndex_P(GIF_DIRECTORY, index) >= 0);
         else good = (openGifFilenameByIndex(GIF_DIRECTORY, index) >= 0);
         if (good >= 0) {
-            tft.fillScreen(g_gif ? MAGENTA : DISKCOLOUR);
+            tft.fillScreen(g_gif ? BLACK : DISKCOLOUR);
             tft.fillRect(GIFWIDTH, 0, 1, tft.height(), WHITE);
             tft.fillRect(278, 0, 1, tft.height(), WHITE);
 
